@@ -1,6 +1,6 @@
 {
   "name": "snapcast-server",
-  "version": "0.25.1",
+  "version": "0.25.2",
   "slug": "snapcastserver",
   "description": "Snapcast Server",
   "startup": "system",
@@ -9,15 +9,15 @@
   "map": ["share:rw"],
   "options": { 
     "stream": {
-        "streams": ["pipe:///share/snapfifo/librespot?name=SpotifyConnect&sampleformat=44100:16:2", "pipe:///share/snapfifo/mopidy?name=Mopidy&sampleformat=44100:16:2", "tcp://0.0.0.0?port=4953&name=snapbroadcast"],
-        "buffer": "1000",
+        "streams": ["airplay:///shairport-sync?name=Airplay&devicename=ss1", "pipe:///share/snapfifo/librespot?name=SpotifyConnect&sampleformat=44100:16:2", "pipe:///share/snapfifo/mopidy?name=Mopidy&sampleformat=44100:16:2", "tcp://0.0.0.0?port=4953&name=snapbroadcast"],
         "codec": "flac",
-        "send_to_muted": "false",
-        "sampleformat": "48000:16:2"
+        "sampleformat": "44100:16:2"
         },
     "http": {
         "enabled": "true",
-        "doc_root": " "
+        "bind_to_address": "0,0,0,0",
+        "port": "1780",
+        "doc_root": "/usr/share/snapserver/snapweb"
         },
     "tcp": {
         "enabled": "true"
@@ -33,13 +33,13 @@
   "schema": {
     "stream": {
         "streams": ["str"],
-        "buffer": "int",
         "codec": "str",
-        "send_to_muted": "str",
         "sampleformat": "str"
         },
     "http": {
         "enabled": "str",
+        "bind_to_address": "str",
+        "port": "int",
         "doc_root": "str"
         },
     "tcp": {
