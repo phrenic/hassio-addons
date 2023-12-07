@@ -13,17 +13,30 @@ bashio::log.info "Populating snapserver.conf..."
 
 # Start creation of configuration Hardcoded
 
-echo "[http]"
-echo "enabled = true"
-echo "bind_to_address = 0.0.0.0"
-echo "port = 1780"
-echo "doc_root = /usr/share/snapserver/snapweb"
+echo "[stream]" > "${config}"
+for stream in $(bashio::config 'stream.streams'); do
+    echo "stream = ${stream}" >> "${config}"
+done
+echo "codec = $(bashio::config 'stream.codec')" >> "${config}"
+echo "sampleformat = $(bashio::config 'stream.sampleformat')" >> "${config}"
 
-echo "[stream]"
-echo "source = airplay:///shairport-sync?name=Airplay&devicename=snap1"
+echo "[http]" >> "${config}"
+echo "enabled = $(bashio::config 'http.enabled')" >> "${config}"
+echo "bind_to_address = $(bashio::config 'http.bindtoaddress')" >> "${config}"
+echo "port = $(bashio::config 'http.portx')" >> "${config}"
+echo "doc_root = $(bashio::config 'http.docroot')" >> "${config}"
 
-echo "sampleformat = 44100:16:2"
-echo "codec = flac"
+echo "[tcp]" >> "${config}"
+echo "enabled = $(bashio::config 'tcp.enabled')" >> "${config}"
+
+echo "[logging]" >> "${config}"
+echo "debug = $(bashio::config 'logging.enabled')" >> "${config}"
+
+echo "[server]" >> "${config}"
+echo "threads = $(bashio::config 'server.threads')" >> "${config}"
+
+echo "[server]" >> "${config}"
+echo "datadir = $(bashio::config 'server.datadir')" >> "${config}"
 
 bashio::log.info "Starting SnapServer..."
 
