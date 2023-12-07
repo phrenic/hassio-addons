@@ -23,7 +23,7 @@ echo "sampleformat = $(bashio::config 'stream.sampleformat')" >> "${config}"
 echo "[http]" >> "${config}"
 echo "enabled = $(bashio::config 'http.enabled')" >> "${config}"
 echo "bind_to_address = $(bashio::config 'http.bindtoaddress')" >> "${config}"
-echo "port = $(bashio::config 'http.portx')" >> "${config}"
+echo "port = $(bashio::config 'http.port')" >> "${config}"
 echo "doc_root = $(bashio::config 'http.docroot')" >> "${config}"
 
 echo "[tcp]" >> "${config}"
