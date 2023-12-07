@@ -9,9 +9,10 @@ if ! bashio::fs.file_exists '/etc/snapserver.conf'; then
     touch /etc/snapserver.conf ||
         bashio::exit.nok "Could not create snapserver.conf file on filesystem"
 fi
-bashio::log.info "2Populating snapserver.conf..."
+bashio::log.info "4Populating snapserver.conf..."
 
-echo "--stream.source=airplay:///shairport-sync?name=Airplay&devicename=ss1"
+echo "[stream]" >> $config
+echo "source = airplay:///shairport-sync?name=Airplay&devicename=ss1" >> $config
 
 bashio::log.info "Starting SnapServer..."
 
