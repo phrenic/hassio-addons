@@ -39,7 +39,7 @@
     "http": {
         "enabled": "str",
         "bind_to_address": "str",
-        "port": "int",
+        "port": "str",
         "doc_root": "str"
         },
     "tcp": {
